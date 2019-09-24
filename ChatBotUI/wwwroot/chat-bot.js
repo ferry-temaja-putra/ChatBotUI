@@ -25,7 +25,7 @@ function displayActionText() {
             placeholder: ''
         }
     }).then(function (res) {
-        loadingMsgIndex = botui.message.bot({
+        botui.message.bot({
             delay: 0,
             loading: true
         }).then(function (index) {
@@ -41,7 +41,7 @@ function displayActionButtons(buttons) {
         addMessage: true,
         action: buttons
     }).then(function (res) {
-        loadingMsgIndex = botui.message.bot({
+        botui.message.bot({
             delay: 0,
             loading: true
         }).then(function (index) {
