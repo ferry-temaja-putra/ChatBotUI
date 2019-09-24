@@ -7,6 +7,15 @@ botui.message.add({
     delay: 500
 }).then(waitingResponse);
 
+function waitingResponse(res) {
+    if (!res || res.options.length == 0) {
+        displayActionText();
+    }    
+    else {
+        var buttons = res.options.map(createButton);
+        displayActionButtons(buttons);
+    }
+}
 
 function displayActionText() {
     botui.action.text({
@@ -26,8 +35,24 @@ function displayActionText() {
     });
 }
 
-function waitingResponse(res) {
-    displayActionText();
+function displayActionButtons(buttons) {
+    botui.action.button({
+        delay: 250,
+        addMessage: true,
+        action: buttons
+    }).then(function (res) {
+        loadingMsgIndex = botui.message.bot({
+            delay: 0,
+            loading: true
+        }).then(function (index) {
+            loadingMsgIndex = index;
+            sendXHR(res.value, handleServerResponse)
+        });
+    });
+}
+
+function createButton(value) {
+    return {text: value, value: value}
 }
 
 function handleServerResponse(res) {
