@@ -24,15 +24,7 @@ function displayActionText() {
             size: 30,
             placeholder: ''
         }
-    }).then(function (res) {
-        botui.message.bot({
-            delay: 0,
-            loading: true
-        }).then(function (index) {
-            loadingMsgIndex = index;
-            sendXHR(res.value, handleServerResponse)
-        });
-    });
+    }).then(displayLoading);
 }
 
 function displayActionButtons(buttons) {
@@ -40,14 +32,16 @@ function displayActionButtons(buttons) {
         delay: 250,
         addMessage: true,
         action: buttons
-    }).then(function (res) {
-        botui.message.bot({
-            delay: 0,
-            loading: true
-        }).then(function (index) {
-            loadingMsgIndex = index;
-            sendXHR(res.value, handleServerResponse)
-        });
+    }).then(displayLoading);
+}
+
+function displayLoading (res) {
+    botui.message.bot({
+        delay: 0,
+        loading: true
+    }).then(function (index) {
+        loadingMsgIndex = index;
+        sendXHR(res.value, handleServerResponse)
     });
 }
 
