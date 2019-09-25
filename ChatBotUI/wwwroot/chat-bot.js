@@ -10,7 +10,7 @@ botui.message.add({
 function waitingResponse(res) {
     if (!res || res.options.length == 0) {
         displayActionText();
-    }    
+    }
     else {
         var buttons = res.options.map(createButton);
         displayActionButtons(buttons);
@@ -35,7 +35,7 @@ function displayActionButtons(buttons) {
     }).then(displayLoading);
 }
 
-function displayLoading (res) {
+function displayLoading(res) {
     botui.message.bot({
         delay: 0,
         loading: true
@@ -46,7 +46,7 @@ function displayLoading (res) {
 }
 
 function createButton(value) {
-    return {text: value, value: value}
+    return { icon: 'check', text: value, value: value }
 }
 
 function handleServerResponse(res) {

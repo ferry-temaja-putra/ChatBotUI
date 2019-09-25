@@ -1,5 +1,6 @@
 ﻿using ChatBotUI.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace ChatBotUI.Controllers
 {
@@ -12,14 +13,16 @@ namespace ChatBotUI.Controllers
         {
             var lowerInput = input.ToLower();
             var response = new BotResponse();
+            var products = new string[] { "asset management", "financials", "student management" };
 
             if (lowerInput == "hi")
             {
                 response.Content = "Please select a product:";
                 response.Options.Add("Asset Management");
                 response.Options.Add("Financials");
+                response.Options.Add("Student Management");
             }
-            else if (lowerInput == "asset management" || lowerInput == "financials")
+            else if (products.Contains(lowerInput))
             {
                 response.Content = $"You selected [{input}]";
             }
